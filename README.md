@@ -8,7 +8,7 @@ Tpye ':' to enter command mode and 'esc' to go back to normal mode.
 - 'open': open a file
 - 'q': quit the app
 
-### Normal mode
+### Normal Mode
 - 'j': scroll down with a small step
 - 'k': scroll up with a small step
 - 'd': scroll down with a big step
