@@ -25,21 +25,8 @@ extension ViewController {
             handleNormalModeInput(event: event)
         }
         
-        //        switch currentMode {
-        //        case .commandMode:
-        //            self.inputBuffer = "COMMAND MODE"
-        //        default:
-        //            self.inputBuffer = "NORMAL MODE"
-        //        }
         self.inputTextLabel.stringValue = self.inputBuffer
         Swift.print(event.characters!)
-        // Display everything !
-        //        if self.inputBuffer.count <= 20 {
-        //            self.inputBuffer.append(event.characters!)
-        //        } else {
-        //            self.inputBuffer = ""
-        //        }
-        //        self.inputTextLabel.stringValue = self.inputBuffer
         
         return true
     }
@@ -72,7 +59,7 @@ extension ViewController {
         } else if event.characters == "p" {
             Swift.print(pdfView.currentDestination as Any)
         } else if event.characters == "o" {
-            Swift.print(pdfView.currentPage?.bounds(for: PDFDisplayBox.artBox) as Any)
+            Swift.print(pdfView.currentPage?.bounds(for: PDFDisplayBox.artBox) as Any)      
         } else if event.characters == "a" {
             Swift.print(pdfDocument?.documentAttributes as Any)
         } else {
@@ -110,6 +97,8 @@ extension ViewController {
             
             // pass PDFDocument to PDFView
             pdfView.document = pdfDocument
+            
+            pageFrame = PageFrame(of: pdfView)
         }
     }
     

@@ -19,13 +19,11 @@ class ViewController: NSViewController {
     
     var currentMode: Mode = .normalMode
     var currentPage: Int?
-    var currentTop: CGFloat?
-    
+    var pageFrame: PageFrame?
     var url: URL?
     
     var pdfDocument: PDFDocument?
     
-//
     override func viewDidLoad() {
         super.viewDidLoad()
         
