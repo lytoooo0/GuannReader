@@ -52,20 +52,34 @@ extension ViewController {
     }
     
     func handleNormalModeInput(event: NSEvent) {
-        if event.characters == ":" {
+        switch event.characters {
+        case ":":
             inputBuffer.append(":")
             currentMode = .commandMode
-            return
-        } else if event.characters == "p" {
-            Swift.print(pdfView.currentDestination as Any)
-        } else if event.characters == "o" {
-            Swift.print(pdfView.currentPage?.bounds(for: PDFDisplayBox.artBox) as Any)      
-        } else if event.characters == "a" {
-            Swift.print(pdfDocument?.documentAttributes as Any)
-        } else {
-            scrollPDFView(command: event.characters!)
+        case "j":
+            scrollPDFView(direction: .down, step: .small)
+        case "k":
+            scrollPDFView(direction: .up, step: .small)
+        case "d":
+            scrollPDFView(direction: .down, step: .big)
+        case "u":
+            scrollPDFView(direction: .up, step: .big)
+        default:
+            break
         }
         
+//        if event.characters == ":" {
+//            inputBuffer.append(":")
+//            currentMode = .commandMode
+//            return
+//        } else if event.characters == "p" {
+//            Swift.print(pdfView.currentDestination as Any)
+//        } else if event.characters == "o" {
+//            Swift.print(pdfView.currentPage?.bounds(for: PDFDisplayBox.artBox) as Any)
+//        } else if event.characters == "a" {
+//            Swift.print(pdfDocument?.documentAttributes as Any)
+//        }
+//
     }
     
     func handleCommands(command: String) {
@@ -99,6 +113,10 @@ extension ViewController {
             pdfView.document = pdfDocument
             
             pageFrame = PageFrame(of: pdfView)
+            currentUpperRightCoord = CGPoint()
+            currentUpperRightCoord?.x = pageFrame!.width
+            currentUpperRightCoord?.y = pageFrame!.height
+            currentPage = pdfView.currentPage
         }
     }
     
@@ -110,34 +128,41 @@ extension ViewController {
 
 // MARK: - Normal Mode Functions
 extension ViewController {
-    private func scrollPDFView(command: String) {
-        var direction = 0
-        var step      = 0
+    
+    private func scrollPDFView(direction: Direction, step: Step) {
         
-        switch command {
-        case "j":
-            direction = 1
-            step      = 1
-        case "k":
-            direction = -1
-            step      = 1
-        case "d":
-            direction = 1
-            step      = 50
-        case "u":
-            direction = -1
-            step      = 50
-        default: break
+        // Move to the new destination
+        // Previous codes
+//        var point = pdfView.currentDestination?.point
+        let directionValue = direction.rawValue
+        let stepValue      = step.rawValue
+        
+//        point?.y -= directionValue*stepValue
+//
+//        let destination = PDFDestination(page: pdfView.currentPage!, at: point!)
+//        pdfView.go(to: destination)
+        
+        
+        // New codes
+        if direction == .down {
+            if currentUpperRightCoord!.y >= stepValue - 5 { // Normal case. -5 due to the grey space
+                currentUpperRightCoord!.y -= stepValue*directionValue
+                let destination = PDFDestination(page: currentPage!, at: currentUpperRightCoord!)
+                pdfView.go(to: destination)
+            } else { // Need to turn page
+                currentPage = pdfView.currentPage
+                let totalValue = pageFrame!.height - stepValue + currentUpperRightCoord!.y + 5 // +5 due to the grey space
+                currentUpperRightCoord?.y = totalValue
+                let destination = PDFDestination(page: currentPage!, at: currentUpperRightCoord!)
+                pdfView.go(to: destination)
+            }
+        } else { // up
+            if (pageFrame!.height - currentUpperRightCoord!.y) >= stepValue { // Normal case
+
+            } else { // Need to turn page
+
+            }
         }
-        
-        var point = pdfView.currentDestination?.point
-        
-        
-        point?.y -= CGFloat(direction*step)
-        
-        
-        let destination = PDFDestination(page: pdfView.currentPage!, at: point!)
-        pdfView.go(to: destination)
         
         // TODO: Bug when scrolling too much times.
         // TODO: Make scrolling more fluently by
@@ -146,6 +171,7 @@ extension ViewController {
         //     XXXXX
         //     pdfView.go()
         //     refreshView()
-        // }
+        // }     ↓
+        // pdfView.needsDisplay = true
     }
 }

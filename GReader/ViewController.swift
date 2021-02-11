@@ -17,12 +17,19 @@ class ViewController: NSViewController {
 // MARK: - Properties
     var inputBuffer = ""
     
+    // Current Properties
+    // Mode is for global control
     var currentMode: Mode = .normalMode
-    var currentPage: Int?
-    var pageFrame: PageFrame?
-    var url: URL?
     
+    // Pgae is mainly for scrolling
+    var currentPage : PDFPage? // Meed to record this. See https://developer.apple.com/documentation/pdfkit/pdfview/1504963-currentpage
+    var currentPageIndex: Int  = 0
+    var currentUpperRightCoord: CGPoint? // Page space is a 72 dpi coordinate system with the origin at the lower-left corner of the current page.
+    
+    // PDF Document
     var pdfDocument: PDFDocument?
+    var url: URL?
+    var pageFrame: PageFrame?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -42,6 +49,5 @@ class ViewController: NSViewController {
             // Update the view, if already loaded.
         }
     }
-    
 }
 

@@ -13,6 +13,18 @@ enum Mode {
     case commandMode, normalMode
 }
 
+// MARK: - Direction
+enum Direction : CGFloat{
+    case up = -1
+    case down = 1
+}
+
+// MARK: - Step
+enum Step : CGFloat {
+    case small = 1
+    case big   = 50
+}
+
 // MARK: - Frame of a PDF page
 struct PageFrame {
     var width:  CGFloat
@@ -20,7 +32,7 @@ struct PageFrame {
     init(of: PDFView) {
         let bounds = of.currentPage?.bounds(for: PDFDisplayBox.artBox)
         width  = bounds!.width
-        height = bounds!.height
+        height = bounds!.height + 10 // +12 due to the grey edge
         
         Swift.print("Width:  \(width)\nHeight: \(height)")
         
