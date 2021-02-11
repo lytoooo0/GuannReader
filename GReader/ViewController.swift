@@ -18,6 +18,8 @@ class ViewController: NSViewController {
     var inputBuffer = ""
     
     var currentMode: Mode = .normalMode
+    var currentPage: Int?
+    var currentTop: CGFloat?
     
     var url: URL?
     

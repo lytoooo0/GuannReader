@@ -57,6 +57,8 @@ extension ViewController {
         case kVK_Return:
             handleCommands(command: inputBuffer)
             inputBuffer = ":"
+        case kVK_Delete:
+            inputBuffer.remove(at: inputBuffer.index(before: inputBuffer.endIndex))
         default:
             inputBuffer.append(event.characters!)
         }
@@ -67,6 +69,12 @@ extension ViewController {
             inputBuffer.append(":")
             currentMode = .commandMode
             return
+        } else if event.characters == "p" {
+            Swift.print(pdfView.currentDestination as Any)
+        } else if event.characters == "o" {
+            Swift.print(pdfView.currentPage?.bounds(for: PDFDisplayBox.artBox) as Any)
+        } else if event.characters == "a" {
+            Swift.print(pdfDocument?.documentAttributes as Any)
         } else {
             scrollPDFView(command: event.characters!)
         }
@@ -120,10 +128,10 @@ extension ViewController {
         switch command {
         case "j":
             direction = 1
-            step      = 10
+            step      = 1
         case "k":
             direction = -1
-            step      = 10
+            step      = 1
         case "d":
             direction = 1
             step      = 50
@@ -132,8 +140,12 @@ extension ViewController {
             step      = 50
         default: break
         }
+        
         var point = pdfView.currentDestination?.point
+        
+        
         point?.y -= CGFloat(direction*step)
+        
         
         let destination = PDFDestination(page: pdfView.currentPage!, at: point!)
         pdfView.go(to: destination)
