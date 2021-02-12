@@ -32,7 +32,7 @@ struct PageFrame {
     init(of: PDFView) {
         let bounds = of.currentPage?.bounds(for: PDFDisplayBox.artBox)
         width  = bounds!.width
-        height = bounds!.height + 10 // +12 due to the grey edge
+        height = bounds!.height
         
         Swift.print("Width:  \(width)\nHeight: \(height)")
         

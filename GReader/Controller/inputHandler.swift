@@ -65,7 +65,7 @@ extension ViewController {
         case "u":
             scrollPDFView(direction: .up, step: .big)
         default:
-            break
+            Swift.print(pdfView.currentDestination as Any)
         }
         
 //        if event.characters == ":" {
@@ -131,47 +131,49 @@ extension ViewController {
     
     private func scrollPDFView(direction: Direction, step: Step) {
         
-        // Move to the new destination
-        // Previous codes
-//        var point = pdfView.currentDestination?.point
-        let directionValue = direction.rawValue
         let stepValue      = step.rawValue
-        
-//        point?.y -= directionValue*stepValue
-//
-//        let destination = PDFDestination(page: pdfView.currentPage!, at: point!)
-//        pdfView.go(to: destination)
-        
-        
-        // New codes
-        if direction == .down {
-            if currentUpperRightCoord!.y >= stepValue - 5 { // Normal case. -5 due to the grey space
-                currentUpperRightCoord!.y -= stepValue*directionValue
-                let destination = PDFDestination(page: currentPage!, at: currentUpperRightCoord!)
-                pdfView.go(to: destination)
-            } else { // Need to turn page
-                currentPage = pdfView.currentPage
-                let totalValue = pageFrame!.height - stepValue + currentUpperRightCoord!.y + 5 // +5 due to the grey space
-                currentUpperRightCoord?.y = totalValue
-                let destination = PDFDestination(page: currentPage!, at: currentUpperRightCoord!)
-                pdfView.go(to: destination)
-            }
-        } else { // up
-            if (pageFrame!.height - currentUpperRightCoord!.y) >= stepValue { // Normal case
 
-            } else { // Need to turn page
-
-            }
+        for _ in 1...Int(stepValue) {
+            scrollOneUnit(direction: direction)
         }
-        
-        // TODO: Bug when scrolling too much times.
+
+        // TODO: Buggy when is at the last page and press 'j' or 'd'. Because the currentUpperRightCoord.y continue decreasing but the view is already at the bottom. When press 'k' or 'u', the view will not scrolling until cURC.y reach some value. Have no idea how to detect the value.
         // TODO: Make scrolling more fluently by
         //
         // for i in 0 ... Step {
         //     XXXXX
         //     pdfView.go()
         //     refreshView()
-        // }     ↓
-        // pdfView.needsDisplay = true
+        // }     
+    }
+    
+    func scrollOneUnit(direction: Direction) {
+        if direction == .down {
+            if currentUpperRightCoord!.y >= 0{ // Normal Case
+                currentUpperRightCoord!.y -= direction.rawValue
+                let destination = PDFDestination(page: currentPage!, at: currentUpperRightCoord!)
+                pdfView.go(to: destination)
+            } else if currentPageIndex < pdfDocument!.pageCount{ // Need to Turn page
+                // TODO: Consider the Last page
+                currentPageIndex += 1
+                currentPage = pdfView.currentPage
+                currentUpperRightCoord?.y = pageFrame!.height
+                let destination = PDFDestination(page: currentPage!, at: currentUpperRightCoord!)
+                pdfView.go(to: destination)
+            }
+        } else { // up
+            if currentUpperRightCoord!.y <= pageFrame!.height{ // Normal Case
+                currentUpperRightCoord!.y -= direction.rawValue
+                let destination = PDFDestination(page: currentPage!, at: currentUpperRightCoord!)
+                pdfView.go(to: destination)
+            } else if currentPageIndex != 0{
+                // TODO: Consider the First page
+                currentPageIndex -= 1
+                currentPage = pdfDocument?.page(at: currentPageIndex)
+                currentUpperRightCoord?.y = 0
+                let destination = PDFDestination(page: currentPage!, at: currentUpperRightCoord!)
+                pdfView.go(to: destination)
+            }
+        }
     }
 }
