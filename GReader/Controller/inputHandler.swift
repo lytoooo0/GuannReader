@@ -126,10 +126,11 @@ extension ViewController {
     }
     
     private func expendAllItem() {
-        var rowNum = 0
-        for i in 0...(pdfDocument?.outlineRoot!.numberOfChildren)! {
-            outlineView.expandItem(outlineView.item(atRow: rowNum), expandChildren: true)
-            rowNum += (pdfDocument?.outlineRoot?.child(at: i)!.numberOfChildren)!
+        for i in (0...(pdfDocument?.outlineRoot!.numberOfChildren)!).reversed() {
+            let item = outlineView.item(atRow: i)
+            if outlineView.isExpandable(item) {
+                outlineView.expandItem(item, expandChildren: true)
+            }
         }
     }
 }
