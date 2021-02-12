@@ -38,3 +38,20 @@ struct PageFrame {
         
     }
 }
+
+// MARK: - Outline
+class OutlineNode {
+    var pdfOutline: PDFOutline?
+    var label: String = ""
+    var isLeaf = true
+    var numberOfChild = 0
+    var children = [OutlineNode]()
+    
+    init(pdfOutline: PDFOutline) {
+        self.pdfOutline = pdfOutline
+        self.label = pdfOutline.label!
+        self.numberOfChild = pdfOutline.numberOfChildren
+    }
+    
+}
+

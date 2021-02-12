@@ -59,6 +59,7 @@
 		EB34F8B525D03E9B00ED1C2A /* GReader */ = {
 			isa = PBXGroup;
 			children = (
+				EB5C493B25D6781D00C15E66 /* View */,
 				EBE9E07925D1790A00852D73 /* Model */,
 				EBE9E06C25D0DD8800852D73 /* Controller */,
 				EB34F8B625D03E9B00ED1C2A /* AppDelegate.swift */,
@@ -69,6 +70,13 @@
 				EB34F8C025D03E9D00ED1C2A /* GReader.entitlements */,
 			);
 			path = GReader;
+			sourceTree = "<group>";
+		};
+		EB5C493B25D6781D00C15E66 /* View */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = View;
 			sourceTree = "<group>";
 		};
 		EBE9E06C25D0DD8800852D73 /* Controller */ = {

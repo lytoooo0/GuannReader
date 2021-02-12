@@ -117,11 +117,14 @@ extension ViewController {
             currentUpperRightCoord?.x = pageFrame!.width
             currentUpperRightCoord?.y = pageFrame!.height
             currentPage = pdfView.currentPage
+            
+            outlineView.reloadData()
+            
         }
     }
     
     private func loadOutline() {
-        // TODO
+        
     }
     
 }
@@ -131,7 +134,7 @@ extension ViewController {
     
     private func scrollPDFView(direction: Direction, step: Step) {
         
-        let stepValue      = step.rawValue
+        let stepValue = step.rawValue
 
         for _ in 1...Int(stepValue) {
             scrollOneUnit(direction: direction)

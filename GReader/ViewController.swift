@@ -13,6 +13,7 @@ class ViewController: NSViewController {
 // MARK: - Outlets
     @IBOutlet weak var inputTextLabel: NSTextField!
     @IBOutlet weak var pdfView: PDFView!
+    @IBOutlet weak var outlineView: NSOutlineView!
     
 // MARK: - Properties
     var inputBuffer = ""
@@ -51,3 +52,56 @@ class ViewController: NSViewController {
     }
 }
 
+extension ViewController: NSOutlineViewDataSource {
+    
+    func outlineView(_ outlineView: NSOutlineView, numberOfChildrenOfItem item: Any?) -> Int {
+        
+        if let item = item as? PDFOutline {
+            return item.numberOfChildren
+        } else if pdfDocument != nil {
+            return (pdfDocument?.outlineRoot?.numberOfChildren)!
+        } else {
+            return 0
+        }
+    }
+    
+    func outlineView(_ outlineView: NSOutlineView, child index: Int, ofItem item: Any?) -> Any {
+        if let item = item as? PDFOutline {
+            return item.child(at: index) as Any
+        } else if pdfDocument != nil {
+            return pdfDocument?.outlineRoot?.child(at: index) as Any
+        }
+        return pdfDocument?.outlineRoot as Any
+    }
+    
+    func outlineView(_ outlineView: NSOutlineView, isItemExpandable item: Any) -> Bool {
+        if let item = item as? PDFOutline {
+            if item.numberOfChildren > 0 {
+                return true
+            }
+        }
+        return false
+    }
+}
+
+extension ViewController: NSOutlineViewDelegate {
+    func outlineView(_ outlineView: NSOutlineView, viewFor tableColumn: NSTableColumn?, item: Any) -> NSView? {
+        let cell = outlineView.makeView(withIdentifier: NSUserInterfaceItemIdentifier(rawValue: "HeaderCell"), owner: self) as? NSTableCellView
+        
+        if let item = item as? PDFOutline {
+            cell?.textField?.stringValue = item.label!
+            
+        }
+        return cell
+    }
+    
+//    func outlineViewSelectionDidChange(_ notification: Notification) {
+//        guard let outlineView = notification.object as? NSOutlineView else {
+//            return
+//        }
+//        
+//        let selectedIndex = outlineView.selectedRow
+//        let item = outlineView.item(atRow: selectedIndex) as! PDFOutline
+//        Swift.print(item.index)
+//    }
+}
