@@ -707,18 +707,18 @@
             <objects>
                 <viewController id="XfG-lQ-9wD" customClass="ViewController" customModule="GReader" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" id="m2S-Jp-Qdl">
-                        <rect key="frame" x="0.0" y="0.0" width="800" height="500"/>
+                        <rect key="frame" x="0.0" y="0.0" width="800" height="429"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
                             <scrollView borderType="none" autohidesScrollers="YES" horizontalLineScroll="17" horizontalPageScroll="10" verticalLineScroll="17" verticalPageScroll="10" usesPredominantAxisScrolling="NO" id="6EO-9I-9MB">
-                                <rect key="frame" x="0.0" y="0.0" width="170" height="500"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                <rect key="frame" x="0.0" y="0.0" width="170" height="429"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES"/>
                                 <clipView key="contentView" drawsBackground="NO" id="P61-mb-MGF">
-                                    <rect key="frame" x="0.0" y="0.0" width="170" height="500"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="170" height="429"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     <subviews>
                                         <outlineView verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" selectionHighlightStyle="sourceList" multipleSelection="NO" autosaveColumns="NO" rowSizeStyle="automatic" viewBased="YES" indentationPerLevel="13" outlineTableColumn="p7A-MQ-ObV" id="3zg-p8-HFX">
-                                            <rect key="frame" x="0.0" y="0.0" width="170" height="500"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="170" height="429"/>
                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                             <size key="intercellSpacing" width="3" height="0.0"/>
                                             <color key="backgroundColor" name="_sourceListBackgroundColor" catalog="System" colorSpace="catalog"/>
@@ -783,7 +783,6 @@
                                     </subviews>
                                     <nil key="backgroundColor"/>
                                 </clipView>
-                                <edgeInsets key="contentInsets" left="0.0" right="0.0" top="0.0" bottom="0.0"/>
                                 <scroller key="horizontalScroller" hidden="YES" wantsLayer="YES" verticalHuggingPriority="750" horizontal="YES" id="Gwg-gQ-aix">
                                     <rect key="frame" x="1" y="383" width="148" height="16"/>
                                     <autoresizingMask key="autoresizingMask"/>
@@ -793,13 +792,11 @@
                                     <autoresizingMask key="autoresizingMask"/>
                                 </scroller>
                             </scrollView>
-                            <pdfView autoresizesSubviews="NO" wantsLayer="YES" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="qKu-WJ-U3f">
-                                <rect key="frame" x="178" y="20" width="612" height="480"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
+                            <pdfView autoresizesSubviews="NO" wantsLayer="YES" translatesAutoresizingMaskIntoConstraints="NO" id="qKu-WJ-U3f">
+                                <rect key="frame" x="180" y="36" width="610" height="393"/>
                             </pdfView>
-                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="oYA-3O-F8n">
-                                <rect key="frame" x="176" y="0.0" width="616" height="21"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxY="YES"/>
+                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="oYA-3O-F8n">
+                                <rect key="frame" x="178" y="10" width="614" height="16"/>
                                 <textFieldCell key="cell" lineBreakMode="clipping" id="Ct1-Aw-YIq">
                                     <font key="font" usesAppearanceFont="YES"/>
                                     <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
@@ -807,6 +804,15 @@
                                 </textFieldCell>
                             </textField>
                         </subviews>
+                        <constraints>
+                            <constraint firstAttribute="bottom" secondItem="oYA-3O-F8n" secondAttribute="bottom" constant="10" id="0F1-nl-uiC"/>
+                            <constraint firstItem="qKu-WJ-U3f" firstAttribute="top" secondItem="m2S-Jp-Qdl" secondAttribute="top" id="2El-NQ-QOc"/>
+                            <constraint firstItem="oYA-3O-F8n" firstAttribute="top" secondItem="qKu-WJ-U3f" secondAttribute="bottom" constant="10" id="3jL-kl-nyK"/>
+                            <constraint firstItem="qKu-WJ-U3f" firstAttribute="leading" secondItem="6EO-9I-9MB" secondAttribute="trailing" constant="10" id="L1a-Be-Lod"/>
+                            <constraint firstAttribute="trailing" secondItem="qKu-WJ-U3f" secondAttribute="trailing" constant="10" id="MdX-Zu-T51"/>
+                            <constraint firstItem="oYA-3O-F8n" firstAttribute="leading" secondItem="6EO-9I-9MB" secondAttribute="trailing" constant="10" id="ZhN-k5-fLC"/>
+                            <constraint firstAttribute="trailing" secondItem="oYA-3O-F8n" secondAttribute="trailing" constant="10" id="oVh-NR-PaR"/>
+                        </constraints>
                     </view>
                     <connections>
                         <outlet property="InputTextLabel" destination="oYA-3O-F8n" id="Up3-Hb-2wU"/>
@@ -817,7 +823,7 @@
                 </viewController>
                 <customObject id="rPt-NT-nkU" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="75" y="1267"/>
+            <point key="canvasLocation" x="75" y="1463.5"/>
         </scene>
     </scenes>
 </document>

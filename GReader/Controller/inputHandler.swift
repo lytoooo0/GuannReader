@@ -118,15 +118,20 @@ extension ViewController {
             currentUpperRightCoord?.y = pageFrame!.height
             currentPage = pdfView.currentPage
             
+            
             outlineView.reloadData()
+            expendAllItem()
             
         }
     }
     
-    private func loadOutline() {
-        
+    private func expendAllItem() {
+        var rowNum = 0
+        for i in 0...(pdfDocument?.outlineRoot!.numberOfChildren)! {
+            outlineView.expandItem(outlineView.item(atRow: rowNum), expandChildren: true)
+            rowNum += (pdfDocument?.outlineRoot?.child(at: i)!.numberOfChildren)!
+        }
     }
-    
 }
 
 // MARK: - Normal Mode Functions

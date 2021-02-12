@@ -99,7 +99,7 @@ extension ViewController: NSOutlineViewDelegate {
 //        guard let outlineView = notification.object as? NSOutlineView else {
 //            return
 //        }
-//        
+//
 //        let selectedIndex = outlineView.selectedRow
 //        let item = outlineView.item(atRow: selectedIndex) as! PDFOutline
 //        Swift.print(item.index)
