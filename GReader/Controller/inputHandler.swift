@@ -67,19 +67,6 @@ extension ViewController {
         default:
             Swift.print(pdfView.currentDestination as Any)
         }
-        
-//        if event.characters == ":" {
-//            inputBuffer.append(":")
-//            currentMode = .commandMode
-//            return
-//        } else if event.characters == "p" {
-//            Swift.print(pdfView.currentDestination as Any)
-//        } else if event.characters == "o" {
-//            Swift.print(pdfView.currentPage?.bounds(for: PDFDisplayBox.artBox) as Any)
-//        } else if event.characters == "a" {
-//            Swift.print(pdfDocument?.documentAttributes as Any)
-//        }
-//
     }
     
     func handleCommands(command: String) {
