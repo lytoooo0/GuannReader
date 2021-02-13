@@ -64,6 +64,21 @@ extension ViewController {
             scrollPDFView(direction: .down, step: .big)
         case "u":
             scrollPDFView(direction: .up, step: .big)
+        case "J":
+            if pdfView.canGoToNextPage {
+                pdfView.goToNextPage(pdfView)
+                currentPage = pdfView.currentPage
+                currentPageIndex += 1
+                currentUpperRightCoord?.y = pageFrame!.height
+            }
+        case "K":
+            if pdfView.canGoToPreviousPage {
+                pdfView.goToPreviousPage(pdfView)
+                currentPage = pdfView.currentPage
+                currentPageIndex -= 1
+                currentUpperRightCoord?.y = pageFrame!.height
+            }
+//        case "s": Swith to Sidebar mode TODO
         case "p":
             pdfView.autoScales = true
         default:
