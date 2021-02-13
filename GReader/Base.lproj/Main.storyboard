@@ -710,14 +710,14 @@
                         <rect key="frame" x="0.0" y="0.0" width="800" height="429"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
-                            <scrollView borderType="none" autohidesScrollers="YES" horizontalLineScroll="17" horizontalPageScroll="10" verticalLineScroll="17" verticalPageScroll="10" usesPredominantAxisScrolling="NO" id="6EO-9I-9MB">
+                            <scrollView borderType="none" autohidesScrollers="YES" horizontalLineScroll="20" horizontalPageScroll="10" verticalLineScroll="20" verticalPageScroll="10" usesPredominantAxisScrolling="NO" id="6EO-9I-9MB">
                                 <rect key="frame" x="0.0" y="0.0" width="170" height="429"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES"/>
                                 <clipView key="contentView" drawsBackground="NO" id="P61-mb-MGF">
                                     <rect key="frame" x="0.0" y="0.0" width="170" height="429"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     <subviews>
-                                        <outlineView verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" selectionHighlightStyle="sourceList" multipleSelection="NO" autosaveColumns="NO" rowSizeStyle="automatic" viewBased="YES" indentationPerLevel="13" outlineTableColumn="p7A-MQ-ObV" id="3zg-p8-HFX">
+                                        <outlineView verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" selectionHighlightStyle="sourceList" multipleSelection="NO" autosaveColumns="NO" rowHeight="20" rowSizeStyle="automatic" viewBased="YES" indentationPerLevel="13" outlineTableColumn="p7A-MQ-ObV" id="3zg-p8-HFX">
                                             <rect key="frame" x="0.0" y="0.0" width="170" height="429"/>
                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                             <size key="intercellSpacing" width="3" height="0.0"/>
@@ -737,15 +737,15 @@
                                                     <tableColumnResizingMask key="resizingMask" resizeWithTable="YES" userResizable="YES"/>
                                                     <prototypeCellViews>
                                                         <tableCellView identifier="HeaderCell" id="II2-xL-Pwf">
-                                                            <rect key="frame" x="11" y="0.0" width="147" height="17"/>
+                                                            <rect key="frame" x="11" y="0.0" width="147" height="20"/>
                                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                             <subviews>
                                                                 <textField verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="dHu-m6-fSS">
-                                                                    <rect key="frame" x="0.0" y="1" width="147" height="14"/>
+                                                                    <rect key="frame" x="0.0" y="4" width="147" height="18"/>
                                                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
-                                                                    <textFieldCell key="cell" lineBreakMode="truncatingTail" sendsActionOnEndEditing="YES" alignment="left" id="NI1-gs-kZp" userLabel="Outline">
-                                                                        <font key="font" metaFont="smallSystemBold"/>
-                                                                        <color key="textColor" name="headerColor" catalog="System" colorSpace="catalog"/>
+                                                                    <textFieldCell key="cell" lineBreakMode="truncatingTail" allowsUndo="NO" sendsActionOnEndEditing="YES" alignment="left" id="NI1-gs-kZp" userLabel="Outline">
+                                                                        <font key="font" metaFont="systemMedium" size="13"/>
+                                                                        <color key="textColor" name="secondaryLabelColor" catalog="System" colorSpace="catalog"/>
                                                                         <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                                                     </textFieldCell>
                                                                 </textField>
@@ -755,7 +755,7 @@
                                                             </connections>
                                                         </tableCellView>
                                                         <tableCellView identifier="DataCell" id="V5I-Bg-Ix7">
-                                                            <rect key="frame" x="11" y="17" width="147" height="17"/>
+                                                            <rect key="frame" x="11" y="20" width="147" height="17"/>
                                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                             <subviews>
                                                                 <textField verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="iQV-3n-2y0">
@@ -792,7 +792,7 @@
                                     <autoresizingMask key="autoresizingMask"/>
                                 </scroller>
                             </scrollView>
-                            <pdfView autoresizesSubviews="NO" wantsLayer="YES" acceptsDraggedFiles="YES" translatesAutoresizingMaskIntoConstraints="NO" id="qKu-WJ-U3f">
+                            <pdfView autoresizesSubviews="NO" wantsLayer="YES" acceptsDraggedFiles="YES" displaysPageBreaks="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qKu-WJ-U3f">
                                 <rect key="frame" x="180" y="36" width="610" height="393"/>
                             </pdfView>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="oYA-3O-F8n">

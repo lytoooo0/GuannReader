@@ -21,6 +21,8 @@ extension ViewController {
         switch currentMode {
         case .commandMode:
             handleCommandModeInput(event: event)
+        case .sidebarMode:
+            handelSidebarModeInput(event: event)
         default:
             handleNormalModeInput(event: event)
         }
@@ -35,6 +37,22 @@ extension ViewController {
 // MARK: - Handle Input
 
 extension ViewController {
+    func handelSidebarModeInput(event: NSEvent) {
+        switch Int(event.keyCode) {
+        case kVK_Escape:
+            inputBuffer = ""
+            currentMode = .normalMode
+        case kVK_Return:
+//            handleCommands(command: inputBuffer)
+            inputBuffer = ":"
+        case kVK_Delete:
+            if inputBuffer != "" {
+                inputBuffer.remove(at: inputBuffer.index(before: inputBuffer.endIndex))
+            }
+        default:
+            inputBuffer.append(event.characters!)
+        }
+    }
     
     func handleCommandModeInput(event: NSEvent) {
         switch Int(event.keyCode) {
@@ -80,7 +98,8 @@ extension ViewController {
                 currentPageIndex -= 1
                 currentUpperRightCoord?.y = pageFrame!.height
             }
-//        case "s": Swith to Sidebar mode TODO
+        case "s":
+            currentMode = .sidebarMode
         case "p":
             pdfView.autoScales = true
         default:

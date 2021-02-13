@@ -10,7 +10,7 @@ import PDFKit
 
 // MARK: - Mode
 enum Mode {
-    case commandMode, normalMode
+    case commandMode, normalMode, sidebarMode
 }
 
 // MARK: - Direction
