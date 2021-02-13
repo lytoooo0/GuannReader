@@ -45,7 +45,9 @@ extension ViewController {
             handleCommands(command: inputBuffer)
             inputBuffer = ":"
         case kVK_Delete:
-            inputBuffer.remove(at: inputBuffer.index(before: inputBuffer.endIndex))
+            if inputBuffer != "" {
+                inputBuffer.remove(at: inputBuffer.index(before: inputBuffer.endIndex))
+            }
         default:
             inputBuffer.append(event.characters!)
         }
