@@ -35,6 +35,8 @@ class ViewController: NSViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        NotificationCenter.default.addObserver(self, selector: #selector(updatePDFDocument), name: Notification.Name.PDFViewDocumentChanged, object: pdfView)
+        
         // Do any additional setup after loading the view.
         NSEvent.addLocalMonitorForEvents(matching: .keyDown) {
             if self.myKeyDown(with: $0) {
@@ -52,6 +54,35 @@ class ViewController: NSViewController {
     }
 }
 
+// MARK: - Selector of Notifications
+extension ViewController {
+    @objc func updatePDFDocument() {
+        pdfDocument = pdfView.document
+        pdfView.autoScales = true      // Fit the width of the window.
+        
+        pageFrame = PageFrame(of: pdfView)
+        currentUpperRightCoord = CGPoint()
+        currentUpperRightCoord?.x = pageFrame!.width
+        currentUpperRightCoord?.y = pageFrame!.height
+        currentPage = pdfView.currentPage
+        
+        
+        outlineView.reloadData()
+        expendAllItem()
+    }
+    
+    private func expendAllItem() { // TODO: Find a better place to put this function
+        for i in (0...(pdfDocument?.outlineRoot!.numberOfChildren)!).reversed() {
+            let item = outlineView.item(atRow: i)
+            if outlineView.isExpandable(item) {
+                outlineView.expandItem(item, expandChildren: true)
+            }
+        }
+    }
+}
+
+
+// MARK: - OutlineView
 extension ViewController: NSOutlineViewDataSource {
     
     func outlineView(_ outlineView: NSOutlineView, numberOfChildrenOfItem item: Any?) -> Int {

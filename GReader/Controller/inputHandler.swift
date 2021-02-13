@@ -64,6 +64,8 @@ extension ViewController {
             scrollPDFView(direction: .down, step: .big)
         case "u":
             scrollPDFView(direction: .up, step: .big)
+        case "p":
+            pdfView.autoScales = true
         default:
             Swift.print(pdfView.currentDestination as Any)
         }
@@ -95,29 +97,7 @@ extension ViewController {
         if ((url?.isFileURL) != nil) {
             // Initialize PdfDocument
             pdfDocument = PDFDocument(url: url!)
-            
-            // pass PDFDocument to PDFView
             pdfView.document = pdfDocument
-            
-            pageFrame = PageFrame(of: pdfView)
-            currentUpperRightCoord = CGPoint()
-            currentUpperRightCoord?.x = pageFrame!.width
-            currentUpperRightCoord?.y = pageFrame!.height
-            currentPage = pdfView.currentPage
-            
-            
-            outlineView.reloadData()
-            expendAllItem()
-            
-        }
-    }
-    
-    private func expendAllItem() {
-        for i in (0...(pdfDocument?.outlineRoot!.numberOfChildren)!).reversed() {
-            let item = outlineView.item(atRow: i)
-            if outlineView.isExpandable(item) {
-                outlineView.expandItem(item, expandChildren: true)
-            }
         }
     }
 }
@@ -128,11 +108,11 @@ extension ViewController {
     private func scrollPDFView(direction: Direction, step: Step) {
         
         let stepValue = step.rawValue
-
+        
         for _ in 1...Int(stepValue) {
             scrollOneUnit(direction: direction)
         }
-
+        
         // TODO: Buggy when is at the last page and press 'j' or 'd'. Because the currentUpperRightCoord.y continue decreasing but the view is already at the bottom. When press 'k' or 'u', the view will not scrolling until cURC.y reach some value. Have no idea how to detect the value.
         // TODO: Make scrolling more fluently by
         //
@@ -151,11 +131,13 @@ extension ViewController {
                 pdfView.go(to: destination)
             } else if currentPageIndex < pdfDocument!.pageCount{ // Need to Turn page
                 // TODO: Consider the Last page
-                currentPageIndex += 1
-                currentPage = pdfView.currentPage
-                currentUpperRightCoord?.y = pageFrame!.height
-                let destination = PDFDestination(page: currentPage!, at: currentUpperRightCoord!)
-                pdfView.go(to: destination)
+//                if (pdfView.canGoToNextPage) {
+                    currentPageIndex += 1
+                    currentPage = pdfView.currentPage
+                    currentUpperRightCoord?.y = pageFrame!.height
+                    let destination = PDFDestination(page: currentPage!, at: currentUpperRightCoord!)
+                    pdfView.go(to: destination)
+//                }
             }
         } else { // up
             if currentUpperRightCoord!.y <= pageFrame!.height{ // Normal Case

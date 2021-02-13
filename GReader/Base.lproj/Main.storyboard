@@ -792,7 +792,7 @@
                                     <autoresizingMask key="autoresizingMask"/>
                                 </scroller>
                             </scrollView>
-                            <pdfView autoresizesSubviews="NO" wantsLayer="YES" translatesAutoresizingMaskIntoConstraints="NO" id="qKu-WJ-U3f">
+                            <pdfView autoresizesSubviews="NO" wantsLayer="YES" acceptsDraggedFiles="YES" translatesAutoresizingMaskIntoConstraints="NO" id="qKu-WJ-U3f">
                                 <rect key="frame" x="180" y="36" width="610" height="393"/>
                             </pdfView>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="oYA-3O-F8n">
